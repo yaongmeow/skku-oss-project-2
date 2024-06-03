@@ -103,7 +103,67 @@ public class Screen extends JFrame implements ActionListener {
     }
 
     void createActionButtons() {
+        JButton rollButton = new JButton("");
+        rollButton.setIcon(new ImageIcon(Screen.class.getResource("resource/roll.png")));
+        rollButton.setBounds(254, 625, 81, 64);
+        panel.add(rollButton);
 
+        JButton scoreChart = new JButton("");
+        scoreChart.setIcon(new ImageIcon(Screen.class.getResource("resource/chart.png")));
+        scoreChart.setBounds(469, 62, 256, 64);
+        panel.add(scoreChart);
+
+        JButton submitBtn = new JButton("Submit");
+        submitBtn.setFont(new Font("Arial", Font.BOLD, 12));
+        submitBtn.setBounds(217, 593, 286, 23);
+        panel.add(submitBtn);
+
+        makeButtonTransparent(submitBtn);
+        submitBtn.setBorderPainted(true);
+        submitBtn.addActionListener(this);
+
+        JButton item2 = new JButton("");
+        item2.setIcon(new ImageIcon(Screen.class.getResource("resource/item2.png")));
+        item2.setBounds(141, 625, 81, 64);
+        panel.add(item2);
+
+        JButton item1 = new JButton("");
+        item1.setIcon(new ImageIcon(Screen.class.getResource("resource/item1.png")));
+        item1.setBounds(32, 625, 81, 64);
+        panel.add(item1);
+
+        JButton infoItem1 = new JButton("");
+        infoItem1.setIcon(new ImageIcon(Screen.class.getResource("resource/informationicon.png")));
+        infoItem1.setBounds(50, 573, 44, 44);
+        panel.add(infoItem1);
+
+        JButton infoItem2 = new JButton("");
+        infoItem2.setIcon(new ImageIcon(Screen.class.getResource("resource/informationicon.png")));
+        infoItem2.setBounds(159, 573, 44, 44);
+        panel.add(infoItem2);
+
+        /*
+         * Give some buttons ActionListener and make some buttons and make them
+         * transparent(for pretty visual)
+         */
+        makeButtonTransparent(rollButton);
+        rollButton.addMouseListener(new DiceMouseListener());
+        makeButtonTransparent(scoreChart);
+        scoreChart.addMouseListener(new DiceMouseListener());
+        scoreChart.addActionListener(this);
+        rollButton.addActionListener(this);
+        item1.addActionListener(this);
+        item2.addActionListener(this);
+        makeButtonTransparent(item1);
+        makeButtonTransparent(item2);
+        item1.addMouseListener(new DiceMouseListener());
+        item2.addMouseListener(new DiceMouseListener());
+        makeButtonTransparent(infoItem1);
+        infoItem1.addMouseListener(new DiceMouseListener());
+        makeButtonTransparent(infoItem2);
+        infoItem2.addMouseListener(new DiceMouseListener());
+        infoItem1.addActionListener(this);
+        infoItem2.addActionListener(this);
     }
 
     void createTextFields() {
@@ -122,5 +182,11 @@ public class Screen extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+    }
+
+    private void makeButtonTransparent(JButton button) {
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
     }
 }

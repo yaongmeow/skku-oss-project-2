@@ -1,6 +1,14 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Button extends JButton {
+
+    public Button(String text, String font, int x, int y, int width, int height, Panel panel) {
+        super(text);
+        this.setFont(new Font("Arial", Font.BOLD, 12));
+        this.setBounds(x, y, width, height);
+        panel.add(this);
+    }
     public Button(String iconImagePath, int x, int y, int width, int height, Panel panel) {
         this.setIcon(new ImageIcon((Screen.class.getResource(iconImagePath))));
         this.setBounds(x, y, width, height);
