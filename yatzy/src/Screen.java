@@ -118,10 +118,6 @@ public class Screen extends JFrame implements ActionListener {
         submitBtn.setBounds(217, 593, 286, 23);
         panel.add(submitBtn);
 
-        makeButtonTransparent(submitBtn);
-        submitBtn.setBorderPainted(true);
-        submitBtn.addActionListener(this);
-
         JButton item2 = new JButton("");
         item2.setIcon(new ImageIcon(Screen.class.getResource("resource/item2.png")));
         item2.setBounds(141, 625, 81, 64);
@@ -142,34 +138,38 @@ public class Screen extends JFrame implements ActionListener {
         infoItem2.setBounds(159, 573, 44, 44);
         panel.add(infoItem2);
 
-        /*
-         * Give some buttons ActionListener and make some buttons and make them
-         * transparent(for pretty visual)
-         */
         makeButtonTransparent(rollButton);
         rollButton.addMouseListener(new DiceMouseListener());
+        rollButton.addActionListener(this);
+
         makeButtonTransparent(scoreChart);
         scoreChart.addMouseListener(new DiceMouseListener());
         scoreChart.addActionListener(this);
-        rollButton.addActionListener(this);
+
+        makeButtonTransparent(submitBtn);
+        submitBtn.setBorderPainted(true);
+        submitBtn.addActionListener(this);
+
         item1.addActionListener(this);
-        item2.addActionListener(this);
-        makeButtonTransparent(item1);
-        makeButtonTransparent(item2);
         item1.addMouseListener(new DiceMouseListener());
+        makeButtonTransparent(item1);
+
+        item2.addActionListener(this);
         item2.addMouseListener(new DiceMouseListener());
-        makeButtonTransparent(infoItem1);
-        infoItem1.addMouseListener(new DiceMouseListener());
-        makeButtonTransparent(infoItem2);
-        infoItem2.addMouseListener(new DiceMouseListener());
+        makeButtonTransparent(item2);
+
         infoItem1.addActionListener(this);
+        infoItem1.addMouseListener(new DiceMouseListener());
+        makeButtonTransparent(infoItem1);
+
         infoItem2.addActionListener(this);
+        infoItem2.addMouseListener(new DiceMouseListener());
+        makeButtonTransparent(infoItem2);
     }
 
     void createTextFields() {
         TextField userIDField = new TextField(296, 552, 114, 31, panel);
         TextField ageField = new TextField(457, 552, 46, 31, panel);
-
     }
 
 
