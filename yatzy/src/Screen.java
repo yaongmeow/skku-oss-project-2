@@ -33,6 +33,8 @@ public class Screen extends JFrame implements ActionListener {
         createDiceButtons();
         createLabels();
         createScoreButtons();
+        createTextFields();
+        createActionButtons();
         windowConfiguration(panel);
     }
 
@@ -89,8 +91,27 @@ public class Screen extends JFrame implements ActionListener {
         Label subTotalLabel = new Label("resource/subtotal.png", 44, 463, 199, 64, panel);
         Label totalLabel = new Label("resource/total.png", 396, 463, 199, 64, panel);
         Label subScoreLabel = new Label("0/63", "Arial", 15, 253, 463, 120, 31, panel);
-        Label totalScoreLebel = new Label("0", "Arial", 16, 605, 463, 120, 64, panel);
+        Label totalScoreLabel = new Label("0", "Arial", 16, 605, 463, 120, 64, panel);
+
+        Label title = new Label("resource/title.png", 44, 24, 404, 113, panel);
+        Label randomDice = new Label("resource/dice1.png", 661, 550, 64, 64, panel);
+        Label diceInfo = new Label("resource/diceinfo.png", 513, 550, 138, 59, panel);
+        diceInfo.setHorizontalAlignment(SwingConstants.CENTER);
+        Label bonusLabel = new Label("0", "Arial", 15, 253, 496, 120, 31, panel);
+        Label userNameLabel = new Label("USERNAME", "Arial", 12, 217, 552, 81, 31, panel);
+        Label ageLabel = new Label("AGE", "Arial", 12, 408, 552, 51, 31, panel);
     }
+
+    void createActionButtons() {
+
+    }
+
+    void createTextFields() {
+        TextField userIDField = new TextField(296, 552, 114, 31, panel);
+        TextField ageField = new TextField(457, 552, 46, 31, panel);
+
+    }
+
 
     private void windowConfiguration(Panel panel) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
