@@ -1,10 +1,7 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +18,7 @@ public class Screen extends JFrame implements ActionListener {
 
     public Screen() throws HeadlessException {
         createDiceButtons();
-        placeButtons(panel);
+        createLabels();
         windowConfiguration(panel);
     }
 
@@ -46,13 +43,21 @@ public class Screen extends JFrame implements ActionListener {
         dice5 = new DiceButton("resource/dice1.png", 439, 625, 64, 64, panel);
     }
 
-
-    void placeButtons(Panel panel) {
-        panel.add(dice1);
-        panel.add(dice2);
-        panel.add(dice3);
-        panel.add(dice4);
-        panel.add(dice5);
+    void createLabels() {
+        Label acesLabel = new Label("resource/aces.png", 44, 147, 199, 42, panel);
+        Label deucesLabel = new Label("resource/deuces.png", 44, 199, 199, 42, panel);
+        Label threesLabel = new Label("resource/Threes.png", 44, 251, 199, 42, panel);
+        Label foursLabel = new Label("resource/Fours.png", 44, 303, 199, 42, panel);
+        Label fivesLabel = new Label("resource/Fives.png", 44, 355, 199, 42, panel);
+        Label sixesLabel = new Label("resource/Sixes.png", 44, 407, 199, 42, panel);
+        Label choiceLabel = new Label("resource/Choice.png", 396, 147, 199, 42, panel);
+        Label fourOfKindLabel = new Label("resource/4ofakind.png", 396, 199, 199, 42, panel);
+        Label fullHouseLabel = new Label("resource/fullhouse.png", 396, 251, 199, 42, panel);
+        Label sStraightLabel = new Label("resource/sstraight.png", 396, 303, 199, 42, panel);
+        Label lStraightLabel = new Label("resource/lstraight.png", 396, 355, 199, 42, panel);
+        Label yachtLabel = new Label("resource/yacht.png", 396, 407, 199, 42, panel);
+        Label subTotalLabel = new Label("resource/subtotal.png", 44, 463, 199, 64, panel);
+        Label totalLabel = new Label("resource/total.png", 396, 463, 199, 64, panel);
     }
 
     private void windowConfiguration(Panel panel) {
