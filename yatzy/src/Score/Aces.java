@@ -1,16 +1,17 @@
 package Score;
 
-/*2020314193 Hwang Su Yeong*/
-class Aces extends ScoreBoard {
+import Dice.Dice;
+
+import java.util.List;
+
+class Aces implements  Score {
 	@Override
-	public void calculateScore(Dice[] diceArray) {
-		/* Calculate the score by scoreboard */
-		score = 0;
-		for (int i = 0; i < 5; i++) {
-			int num = diceArray[i].getNum();
-			if (num == 1) {
-				score += num;
-			}
+	public Integer calculateScore(List<Dice> dices) {
+		int score = 0;
+		for (Dice dice : dices) {
+			int num = dice.getNum();
+			if(num == 1) score += num;
 		}
+		return score;
 	}
 }
