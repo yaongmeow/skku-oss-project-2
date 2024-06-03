@@ -8,17 +8,31 @@ import java.util.List;
 public class Screen extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
     private Panel panel = new Panel();
-    private List<DiceButton> diceButtons = new ArrayList<>();
+    private List<Button> diceButtons = new ArrayList<>();
 
-    private DiceButton dice1;
-    private DiceButton dice2;
-    private DiceButton dice3;
-    private DiceButton dice4;
-    private DiceButton dice5;
+    private Button dice1;
+    private Button dice2;
+    private Button dice3;
+    private Button dice4;
+    private Button dice5;
+
+    private Button setScore1;
+    private Button setScore2;
+    private Button setScore3;
+    private Button setScore4;
+    private Button setScore5;
+    private Button setScore6;
+    private Button setScore7;
+    private Button setScore8;
+    private Button setScore9;
+    private Button setScore10;
+    private Button setScore11;
+    private Button setScore12;
 
     public Screen() throws HeadlessException {
         createDiceButtons();
         createLabels();
+        createScoreButtons();
         windowConfiguration(panel);
     }
 
@@ -36,11 +50,27 @@ public class Screen extends JFrame implements ActionListener {
     }
 
     void createDiceButtons() {
-        dice1 = new DiceButton("resource/dice1.png", 365, 625, 64, 64, panel);
-        dice2 = new DiceButton("resource/dice1.png", 513, 625, 64, 64, panel);
-        dice3 = new DiceButton("resource/dice1.png", 587, 625, 64, 64, panel);
-        dice4 = new DiceButton("resource/dice1.png", 661, 625, 64, 64, panel);
-        dice5 = new DiceButton("resource/dice1.png", 439, 625, 64, 64, panel);
+        dice1 = new Button("resource/dice1.png", 365, 625, 64, 64, panel);
+        dice2 = new Button("resource/dice1.png", 513, 625, 64, 64, panel);
+        dice3 = new Button("resource/dice1.png", 587, 625, 64, 64, panel);
+        dice4 = new Button("resource/dice1.png", 661, 625, 64, 64, panel);
+        dice5 = new Button("resource/dice1.png", 439, 625, 64, 64, panel);
+    }
+
+    void createScoreButtons() {
+        Button setScore1 = new Button(253, 145, 120, 44, panel, this);
+        Button setScore2 = new Button(253, 197, 120, 44, panel, this);
+        Button setScore3 = new Button(253, 249, 120, 44, panel, this);
+        Button setScore4 = new Button(253, 301, 120, 44, panel, this);
+        Button setScore5 = new Button(253, 353, 120, 44, panel, this);
+        Button setScore6 = new Button(253, 405, 120, 44, panel, this);
+
+        Button setScore7 = new Button(605, 145, 120, 44, panel, this);
+        Button setScore8 = new Button(605, 197, 120, 44, panel, this);
+        Button setScore9 = new Button(605, 249, 120, 44, panel, this);
+        Button setScore10 = new Button(605, 301, 120, 44, panel, this);
+        Button setScore11 = new Button(605, 353, 120, 44, panel, this);
+        Button setScore12 = new Button(605, 405, 120, 44, panel, this);
     }
 
     void createLabels() {

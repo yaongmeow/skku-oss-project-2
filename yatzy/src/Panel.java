@@ -9,9 +9,9 @@ public class Panel extends JPanel {
         this.setBorder(new EmptyBorder(5, 5, 5, 5));
         this.setLayout(null);
     }
-    void floatDiceButtons(List<DiceButton> diceButtons) {
-        for (DiceButton diceButton : diceButtons) {
-            this.add(diceButton);
+    void floatDiceButtons(List<Button> buttons) {
+        for (Button button : buttons) {
+            this.add(button);
         }
     }
 }
