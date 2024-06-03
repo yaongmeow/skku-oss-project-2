@@ -39,16 +39,11 @@ public class Screen extends JFrame implements ActionListener {
     }
 
     void createDiceButtons() {
-        dice1 = new DiceButton("resource/dice1.png", 365, 625, 64, 64);
-        dice2 = new DiceButton("resource/dice1.png", 513, 625, 64, 64);
-        dice3 = new DiceButton("resource/dice1.png", 587, 625, 64, 64);
-        dice4 = new DiceButton("resource/dice1.png", 661, 625, 64, 64);
-        dice5 = new DiceButton("resource/dice1.png", 439, 625, 64, 64);
-        diceButtons.add(dice1);
-        diceButtons.add(dice2);
-        diceButtons.add(dice3);
-        diceButtons.add(dice4);
-        diceButtons.add(dice5);
+        dice1 = new DiceButton("resource/dice1.png", 365, 625, 64, 64, panel);
+        dice2 = new DiceButton("resource/dice1.png", 513, 625, 64, 64, panel);
+        dice3 = new DiceButton("resource/dice1.png", 587, 625, 64, 64, panel);
+        dice4 = new DiceButton("resource/dice1.png", 661, 625, 64, 64, panel);
+        dice5 = new DiceButton("resource/dice1.png", 439, 625, 64, 64, panel);
     }
 
 
