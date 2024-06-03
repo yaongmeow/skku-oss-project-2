@@ -20,11 +20,7 @@ public class Screen extends JFrame implements ActionListener {
     private DiceButton dice6;
 
     public Screen() throws HeadlessException {
-        dice1 = new DiceButton("resource/dice1.png", 365, 625, 64, 64);
-        dice2 = new DiceButton("resource/dice1.png", 513, 625, 64, 64);
-        dice3 = new DiceButton("resource/dice1.png", 587, 625, 64, 64);
-        dice4 = new DiceButton("resource/dice1.png", 661, 625, 64, 64);
-        dice5 = new DiceButton("resource/dice1.png", 439, 625, 64, 64);
+        createDiceButtons();
 
         Panel panel = new Panel();
         placeButtons(panel);
@@ -43,6 +39,15 @@ public class Screen extends JFrame implements ActionListener {
             }
         });
     }
+
+    void createDiceButtons(){
+        dice1 = new DiceButton("resource/dice1.png", 365, 625, 64, 64);
+        dice2 = new DiceButton("resource/dice1.png", 513, 625, 64, 64);
+        dice3 = new DiceButton("resource/dice1.png", 587, 625, 64, 64);
+        dice4 = new DiceButton("resource/dice1.png", 661, 625, 64, 64);
+        dice5 = new DiceButton("resource/dice1.png", 439, 625, 64, 64);
+    }
+
 
     void placeButtons(Panel panel) {
         panel.add(dice1);
