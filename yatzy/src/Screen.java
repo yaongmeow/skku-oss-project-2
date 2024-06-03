@@ -58,6 +58,8 @@ public class Screen extends JFrame implements ActionListener {
         Label yachtLabel = new Label("resource/yacht.png", 396, 407, 199, 42, panel);
         Label subTotalLabel = new Label("resource/subtotal.png", 44, 463, 199, 64, panel);
         Label totalLabel = new Label("resource/total.png", 396, 463, 199, 64, panel);
+        Label subScoreLabel = new Label("0/63", "Arial", 15, 253, 463, 120, 31, panel);
+        Label totalScoreLebel = new Label("0", "Arial", 16, 605, 463, 120, 64, panel);
     }
 
     private void windowConfiguration(Panel panel) {
