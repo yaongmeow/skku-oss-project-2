@@ -5,24 +5,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Screen extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
-    private Panel panel;
-    private List<DiceButton> diceButtons;
+    private Panel panel = new Panel();
+    private List<DiceButton> diceButtons = new ArrayList<>();
 
     private DiceButton dice1;
     private DiceButton dice2;
     private DiceButton dice3;
     private DiceButton dice4;
     private DiceButton dice5;
-    private DiceButton dice6;
 
     public Screen() throws HeadlessException {
         createDiceButtons();
-
-        Panel panel = new Panel();
         placeButtons(panel);
         windowConfiguration(panel);
     }
@@ -40,12 +38,17 @@ public class Screen extends JFrame implements ActionListener {
         });
     }
 
-    void createDiceButtons(){
+    void createDiceButtons() {
         dice1 = new DiceButton("resource/dice1.png", 365, 625, 64, 64);
         dice2 = new DiceButton("resource/dice1.png", 513, 625, 64, 64);
         dice3 = new DiceButton("resource/dice1.png", 587, 625, 64, 64);
         dice4 = new DiceButton("resource/dice1.png", 661, 625, 64, 64);
         dice5 = new DiceButton("resource/dice1.png", 439, 625, 64, 64);
+        diceButtons.add(dice1);
+        diceButtons.add(dice2);
+        diceButtons.add(dice3);
+        diceButtons.add(dice4);
+        diceButtons.add(dice5);
     }
 
 
