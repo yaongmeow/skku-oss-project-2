@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class Button extends JButton {
 
@@ -16,12 +17,13 @@ public class Button extends JButton {
         panel.add(this);
     }
 
-    public Button(int x, int y, int width, int height, Panel panel, Screen screen) {
+    public Button(int x, int y, int width, int height, Panel panel, Screen screen, List<Button> scoreBoard) {
         this.setBounds(x, y, width, height);
         makeButtonTransparent(this);
         this.setBorderPainted(true);
         this.addActionListener(screen);
         panel.add(this);
+        scoreBoard.add(this);
     }
 
     private void makeButtonTransparent(JButton button) {

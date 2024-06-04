@@ -4,7 +4,7 @@ import dice.Dice;
 
 import java.util.List;
 
-class Choice implements Score {
+public class Choice implements Score {
     @Override
     public Integer calculatedScore(List<Dice> dices) {
         int score = 0;
