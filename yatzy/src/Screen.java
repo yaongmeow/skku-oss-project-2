@@ -244,6 +244,30 @@ public class Screen extends JFrame implements ActionListener {
 
     }
 
+    public void rollDices() {
+        Random random = new Random();
+        int randomInt;
+        for (int i = 0; i < 5; i++) {
+            /* User fixed dice not to be changed */
+            if (fixDice[i])
+                continue;
+
+            /* If the dice is special dice, change the value not by random */
+            if (specialDice[i]) {
+                specialDice[i] = false;
+                diceButtons.get(i).setContentAreaFilled(true);
+                diceButtons.get(i).setBackground(Color.WHITE);
+                dices[i].setNum(numOfRandDice);
+                continue;
+            }
+            /* If it is just normal dice and not fixed, its value will be a random number */
+            randomInt = random.nextInt(6) + 1;
+            dices[i].setNum(randomInt);
+        }
+    }
+
+
+
     private void setDiceImage(int diceNumber, int num) {
         JButton diceButton = null;
 
