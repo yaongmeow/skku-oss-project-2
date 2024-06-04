@@ -10,13 +10,16 @@ import java.util.List;
 import java.util.Random;
 
 public class Screen extends JFrame implements ActionListener {
+    private static ScreenConfiguration screenConfiguration = new ScreenConfiguration();
     private static final long serialVersionUID = 1L;
     private Panel panel = new Panel();
     private List<Button> diceButtons = new ArrayList<>();
     private List<Score> scores = new ArrayList<>();
     private List<Button> scoreBoard = new ArrayList<>();
-    private Dice[] diceArray = new Dice[5];
+    private Dice[] dices = new Dice[5];
     private boolean[] fixDice;
+    private boolean[] specialDice;
+
 
     private Button dice1;
     private Button dice2;
@@ -59,27 +62,27 @@ public class Screen extends JFrame implements ActionListener {
     }
 
     void createDiceButtons() {
-        dice1 = new Button("resource/dice1.png", 365, 625, 64, 64, panel);
-        dice2 = new Button("resource/dice1.png", 513, 625, 64, 64, panel);
-        dice3 = new Button("resource/dice1.png", 587, 625, 64, 64, panel);
-        dice4 = new Button("resource/dice1.png", 661, 625, 64, 64, panel);
-        dice5 = new Button("resource/dice1.png", 439, 625, 64, 64, panel);
+        dice1 = screenConfiguration.createDice("resource/dice1.png", 365, 625, 64, 64, panel, diceButtons);;
+        dice2 = screenConfiguration.createDice("resource/dice1.png", 513, 625, 64, 64, panel, diceButtons);;
+        dice3 = screenConfiguration.createDice("resource/dice1.png", 587, 625, 64, 64, panel, diceButtons);;
+        dice4 = screenConfiguration.createDice("resource/dice1.png", 661, 625, 64, 64, panel, diceButtons);;
+        dice5 = screenConfiguration.createDice("resource/dice1.png", 439, 625, 64, 64, panel, diceButtons);;
     }
 
     void createScoreButtons() {
-        Button setScore1 = new Button(253, 145, 120, 44, panel, this, scoreBoard);
-        Button setScore2 = new Button(253, 197, 120, 44, panel, this, scoreBoard);
-        Button setScore3 = new Button(253, 249, 120, 44, panel, this, scoreBoard);
-        Button setScore4 = new Button(253, 301, 120, 44, panel, this, scoreBoard);
-        Button setScore5 = new Button(253, 353, 120, 44, panel, this, scoreBoard);
-        Button setScore6 = new Button(253, 405, 120, 44, panel, this, scoreBoard);
+        Button score1 = screenConfiguration.createScoreButtons(253, 145, 120, 44, panel, this, scoreBoard);
+        Button score2 = screenConfiguration.createScoreButtons(253, 197, 120, 44, panel, this, scoreBoard);
+        Button score3 = screenConfiguration.createScoreButtons(253, 249, 120, 44, panel, this, scoreBoard);
+        Button score4 = screenConfiguration.createScoreButtons(253, 301, 120, 44, panel, this, scoreBoard);
+        Button score5 = screenConfiguration.createScoreButtons(253, 353, 120, 44, panel, this, scoreBoard);
+        Button score6 = screenConfiguration.createScoreButtons(253, 405, 120, 44, panel, this, scoreBoard);
 
-        Button setScore7 = new Button(605, 145, 120, 44, panel, this, scoreBoard);
-        Button setScore8 = new Button(605, 197, 120, 44, panel, this, scoreBoard);
-        Button setScore9 = new Button(605, 249, 120, 44, panel, this, scoreBoard);
-        Button setScore10 = new Button(605, 301, 120, 44, panel, this, scoreBoard);
-        Button setScore11 = new Button(605, 353, 120, 44, panel, this, scoreBoard);
-        Button setScore12 = new Button(605, 405, 120, 44, panel, this, scoreBoard);
+        Button score7 = screenConfiguration.createScoreButtons(605, 145, 120, 44, panel, this, scoreBoard);
+        Button score8 = screenConfiguration.createScoreButtons(605, 197, 120, 44, panel, this, scoreBoard);
+        Button score9 = screenConfiguration.createScoreButtons(605, 249, 120, 44, panel, this, scoreBoard);
+        Button score10 = screenConfiguration.createScoreButtons(605, 301, 120, 44, panel, this, scoreBoard);
+        Button score11 = screenConfiguration.createScoreButtons(605, 353, 120, 44, panel, this, scoreBoard);
+        Button score12 = screenConfiguration.createScoreButtons(605, 405, 120, 44, panel, this, scoreBoard);
     }
 
     void createLabels() {

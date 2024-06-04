@@ -3,6 +3,8 @@ import java.awt.*;
 import java.util.List;
 
 public class Button extends JButton {
+    public Button() {
+    }
 
     public Button(String text, String font, int x, int y, int width, int height, Panel panel) {
         super(text);
