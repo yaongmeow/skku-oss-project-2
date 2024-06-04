@@ -17,7 +17,8 @@ public class Screen extends JFrame implements ActionListener {
     private List<Button> diceButtons = new ArrayList<>();
     private List<Score> scores = new ArrayList<>();
     private List<Button> scoreBoard = new ArrayList<>();
-    private Dice[] dices = new Dice[5];
+
+    private List<Dice> dices = new ArrayList<>();
     private boolean[] fixDice = new boolean[5];
     private boolean[] specialDice = new boolean[5];
 
@@ -218,8 +219,9 @@ public class Screen extends JFrame implements ActionListener {
 
     void resetDices() {
         rollcount = 0;
+        dices.clear();
         for (int i = 0; i < 5; i++) {
-            dices[i] = new Dice();
+            dices.add(new Dice());
             setDiceImage(i + 1, 1);
             fixDice[i] = false;
             specialDice[i] = false;
@@ -273,8 +275,6 @@ public class Screen extends JFrame implements ActionListener {
         }
     }
 
-
-
     private void setDiceImage(int diceNumber, int num) {
         JButton diceButton = null;
 
@@ -320,6 +320,16 @@ public class Screen extends JFrame implements ActionListener {
         }
     }
 
+    private void setScore() {
+        for (int i = 0; i < 12; i++) {
+            JButton button = scoreBoard.get(i);
+            if (button.isEnabled()) {
+                Score score = scores.get(i);
+                Integer calculatedScore = score.calculatedScore(dices);
+                button.setText(Integer.toString(calculatedScore));
+            }
+        }
+    }
     private void start() {
         SwingWorker<Void, Integer> randDice = new SwingWorker<Void, Integer>() {
 
