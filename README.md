@@ -26,21 +26,22 @@ https://namu.wiki/w/%EC%95%BC%EC%B0%8C
 ## 게임 예시
 1. 주사위 굴리고 점수 등록하기
 
-![roll_and_save](https://github.com/Suyeong00/yatzy/assets/158289642/e4c711b5-4b42-4f54-b37f-af8123403e5f)
-주사위는 클릭으로 고정/고정해제가 가능합니다.
-고정된 주사위는 roll 버튼을 눌러도 주사위 눈이 변하지 않습니다.
-주사위는 3번까지 roll 할 수 있습니다.
+![roll_and_save](https://github.com/Suyeong00/yatzy/assets/158289642/e4c711b5-4b42-4f54-b37f-af8123403e5f)  
+
+주사위는 클릭으로 고정/고정해제가 가능합니다.  
+고정된 주사위는 roll 버튼을 눌러도 주사위 눈이 변하지 않습니다. 
+주사위는 3번까지 roll 할 수 있습니다.  
 
 2. 1번 아이템 사용
 
-![item1](https://github.com/Suyeong00/yatzy/assets/158289642/47339de2-24f3-45c8-a0d4-5f576a999234)
-1번 아이템을 사용하면 최대 2개까지의 주사위를 스페셜 주사위로 설정할 수 있습니다.
-스페셜 주사위는 변하는 random dice에 맞춰 roll 버튼을 클릭하면 클릭 당시의 random dice의 주사위 눈으로 변합니다.
+![item1](https://github.com/Suyeong00/yatzy/assets/158289642/47339de2-24f3-45c8-a0d4-5f576a999234)  
+1번 아이템을 사용하면 최대 2개까지의 주사위를 스페셜 주사위로 설정할 수 있습니다.  
+스페셜 주사위는 변하는 random dice에 맞춰 roll 버튼을 클릭하면 클릭 당시의 random dice의 주사위 눈으로 변합니다.  
 
 3. 2번 아이템 사용
 
-![item2](https://github.com/Suyeong00/yatzy/assets/158289642/fd853d16-6b30-42d2-a35f-6b48610d5d88)
-원래 주사위는 3번까지 굴리는것이 가능하지만, 2번 아이템을 사용하면 3번째 주사위를 굴렸을 때 한번의 기회를 더 얻을 수 있습니다.
+![item2](https://github.com/Suyeong00/yatzy/assets/158289642/fd853d16-6b30-42d2-a35f-6b48610d5d88)  
+원래 주사위는 3번까지 굴리는것이 가능하지만, 2번 아이템을 사용하면 3번째 주사위를 굴렸을 때 한번의 기회를 더 얻을 수 있습니다.  
 
 ## 코드 설명
 ### class Dice
