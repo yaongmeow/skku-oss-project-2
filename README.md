@@ -7,6 +7,11 @@
 ## 실행 예시
 ![roll_and_save](https://github.com/Suyeong00/yatzy/assets/158289642/e4c711b5-4b42-4f54-b37f-af8123403e5f)
 
+![item1](https://github.com/Suyeong00/yatzy/assets/158289642/47339de2-24f3-45c8-a0d4-5f576a999234)
+
+![item2](https://github.com/Suyeong00/yatzy/assets/158289642/fd853d16-6b30-42d2-a35f-6b48610d5d88)
+
+
 ## 코드 설명
 
 ## Todo List
