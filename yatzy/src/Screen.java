@@ -18,11 +18,23 @@ public class Screen extends JFrame implements ActionListener {
     private List<Score> scores = new ArrayList<>();
     private List<Button> scoreBoard = new ArrayList<>();
     private Dice[] dices = new Dice[5];
-    private boolean[] fixDice;
-    private boolean[] specialDice;
+    private boolean[] fixDice = new boolean[5];
+    private boolean[] specialDice = new boolean[5];
+
 
     private JButton item1;
     private JButton item2;
+
+    private JButton submitBtn;
+    private JButton scoreChart;
+    private JButton infoItem1;
+    private JButton infoItem2;
+
+    private JButton rollButton;
+    private JLabel subScoreLabel;
+    private JLabel totalScoreLabel;
+    private JLabel randomDice;
+    private JLabel bonusLabel;
 
 
     private Button dice1;
@@ -51,6 +63,7 @@ public class Screen extends JFrame implements ActionListener {
         createActionButtons();
         createScores();
         resetDices();
+        start();
         windowConfiguration(panel);
     }
 
@@ -110,7 +123,7 @@ public class Screen extends JFrame implements ActionListener {
         Label totalScoreLabel = new Label("0", "Arial", 16, 605, 463, 120, 64, panel);
 
         Label title = new Label("resource/title.png", 44, 24, 404, 113, panel);
-        Label randomDice = new Label("resource/dice1.png", 661, 550, 64, 64, panel);
+        randomDice = new Label("resource/dice1.png", 661, 550, 64, 64, panel);
         Label diceInfo = new Label("resource/diceinfo.png", 513, 550, 138, 59, panel);
         diceInfo.setHorizontalAlignment(SwingConstants.CENTER);
         Label bonusLabel = new Label("0", "Arial", 15, 253, 496, 120, 31, panel);
@@ -119,37 +132,37 @@ public class Screen extends JFrame implements ActionListener {
     }
 
     void createActionButtons() {
-        JButton rollButton = new JButton("");
+        rollButton = new JButton("");
         rollButton.setIcon(new ImageIcon(Screen.class.getResource("resource/roll.png")));
         rollButton.setBounds(254, 625, 81, 64);
         panel.add(rollButton);
 
-        JButton scoreChart = new JButton("");
+        scoreChart = new JButton("");
         scoreChart.setIcon(new ImageIcon(Screen.class.getResource("resource/chart.png")));
         scoreChart.setBounds(469, 62, 256, 64);
         panel.add(scoreChart);
 
-        JButton submitBtn = new JButton("Submit");
+        submitBtn = new JButton("Submit");
         submitBtn.setFont(new Font("Arial", Font.BOLD, 12));
         submitBtn.setBounds(217, 593, 286, 23);
         panel.add(submitBtn);
 
-        JButton item2 = new JButton("");
-        item2.setIcon(new ImageIcon(Screen.class.getResource("resource/item2.png")));
-        item2.setBounds(141, 625, 81, 64);
-        panel.add(item2);
-
-        JButton item1 = new JButton("");
+        item1 = new JButton("");
         item1.setIcon(new ImageIcon(Screen.class.getResource("resource/item1.png")));
         item1.setBounds(32, 625, 81, 64);
         panel.add(item1);
 
-        JButton infoItem1 = new JButton("");
+        item2 = new JButton("");
+        item2.setIcon(new ImageIcon(Screen.class.getResource("resource/item2.png")));
+        item2.setBounds(141, 625, 81, 64);
+        panel.add(item2);
+
+        infoItem1 = new JButton("");
         infoItem1.setIcon(new ImageIcon(Screen.class.getResource("resource/informationicon.png")));
         infoItem1.setBounds(50, 573, 44, 44);
         panel.add(infoItem1);
 
-        JButton infoItem2 = new JButton("");
+        infoItem2 = new JButton("");
         infoItem2.setIcon(new ImageIcon(Screen.class.getResource("resource/informationicon.png")));
         infoItem2.setBounds(159, 573, 44, 44);
         panel.add(infoItem2);
@@ -274,6 +287,48 @@ public class Screen extends JFrame implements ActionListener {
                 diceButton.setIcon(new ImageIcon(Screen.class.getResource("resource/dice6.png")));
                 break;
         }
+    }
+
+    private void start() {
+        SwingWorker<Void, Integer> randDice = new SwingWorker<Void, Integer>() {
+
+            /* In background, just update the random dice number */
+            @Override
+            protected Void doInBackground() throws Exception {
+                while (true) {
+                    Thread.sleep(300);
+                    numOfRandDice++;
+                    if (numOfRandDice > 6)
+                        numOfRandDice = 1;
+                    publish(numOfRandDice);
+                }
+            }
+            protected void process(List<Integer> chunks) {
+                int num = chunks.get(chunks.size() - 1);
+                switch (num) {
+                    case 1:
+                        randomDice.setIcon(new ImageIcon(Screen.class.getResource("resource/dice1.png")));
+                        break;
+                    case 2:
+                        randomDice.setIcon(new ImageIcon(Screen.class.getResource("resource/dice2.png")));
+                        break;
+                    case 3:
+                        randomDice.setIcon(new ImageIcon(Screen.class.getResource("resource/dice3.png")));
+                        break;
+                    case 4:
+                        randomDice.setIcon(new ImageIcon(Screen.class.getResource("resource/dice4.png")));
+                        break;
+                    case 5:
+                        randomDice.setIcon(new ImageIcon(Screen.class.getResource("resource/dice5.png")));
+                        break;
+                    case 6:
+                        randomDice.setIcon(new ImageIcon(Screen.class.getResource("resource/dice6.png")));
+                        break;
+                }
+            }
+
+        };
+        randDice.execute();
     }
 
     private void windowConfiguration(Panel panel) {
