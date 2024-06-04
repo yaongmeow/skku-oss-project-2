@@ -330,6 +330,34 @@ public class Screen extends JFrame implements ActionListener {
             }
         }
     }
+
+    private void setResult() {
+        int total = 0;
+        int subtotal = 0;
+        // Calculate sub score
+        for (int i = 0; i < 6; i++) {
+            JButton button = scoreBoard.get(i);
+            if (!button.isEnabled()) {
+                subtotal += scores.get(i).calculatedScore(dices);
+            }
+        }
+        subScoreLabel.setText(Integer.toString(subtotal) + "/63");
+        // If subscore exceeds 63, get a bonus score
+        if (subtotal >= 63) {
+            bonusLabel.setText("35");
+            total += 35;
+        }
+
+        // Calculate total score
+        total += subtotal;
+        for (int i = 6; i < 12; i++) {
+            JButton button = scoreBoard.get(i);
+            if (!button.isEnabled()) {
+                total += scores.get(i).calculatedScore(dices);
+            }
+        }
+        totalScoreLabel.setText(Integer.toString(total));
+    }
     private void start() {
         SwingWorker<Void, Integer> randDice = new SwingWorker<Void, Integer>() {
 
