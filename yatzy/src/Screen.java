@@ -21,6 +21,9 @@ public class Screen extends JFrame implements ActionListener {
     private boolean[] fixDice;
     private boolean[] specialDice;
 
+    private JButton item1;
+    private JButton item2;
+
 
     private Button dice1;
     private Button dice2;
@@ -47,6 +50,7 @@ public class Screen extends JFrame implements ActionListener {
         createTextFields();
         createActionButtons();
         createScores();
+        resetDices();
         windowConfiguration(panel);
     }
 
@@ -216,6 +220,14 @@ public class Screen extends JFrame implements ActionListener {
                 button.setText("0");
             }
         }
+
+        count = 0;
+        numOfRandDice = 0;
+        clickedItem1 = false;
+        clickedItem2 = false;
+        item2.setEnabled(false);
+        item2used = false;
+        issubmitted = false;
 
     }
 
