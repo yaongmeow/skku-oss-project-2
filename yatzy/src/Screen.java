@@ -266,6 +266,13 @@ public class Screen extends JFrame implements ActionListener {
         }
     }
 
+    public void matchDice() {
+        for (int i = 0; i < 5; i++) {
+            int num = dices[i].getNum();
+            setDiceImage(i + 1, num); // 주사위 번호는 1부터 시작하므로 i + 1을 전달
+        }
+    }
+
 
 
     private void setDiceImage(int diceNumber, int num) {
