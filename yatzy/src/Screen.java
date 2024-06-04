@@ -223,14 +223,13 @@ public class Screen extends JFrame implements ActionListener {
             }
         }
 
-        count = 0;
+        //count = 0;
         numOfRandDice = 0;
         clickedItem1 = false;
         clickedItem2 = false;
         item2.setEnabled(false);
-        item2used = false;
+        //item2used = false;
         isSubmitted = false;
-
     }
 
     public void rollDices() {
@@ -493,6 +492,9 @@ public class Screen extends JFrame implements ActionListener {
         // 유저가 roll 버튼을 누르면 주사위를 굴린다
         // 일반 주사위인 경우 주사위의 눈은 랜덤한 숫자이다
         if (clickButton == rollButton) {
+            // 게임이 끝나면 roll을 더 이상 할 수 없다
+            if(count >= 12) return;
+
             // 각 게임마다 유저는 최대 3번의 주사위를 굴릴 수 있다
             // 그러나 아이템 2가 사용되면, 유저는 주사위를 한번 더 굴릴 수 있다
             if (rollcount >= 3 && !clickedItem2) {
