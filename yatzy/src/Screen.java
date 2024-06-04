@@ -37,6 +37,9 @@ public class Screen extends JFrame implements ActionListener {
     private JLabel randomDice;
     private JLabel bonusLabel;
 
+    private JTextField userIDField;
+    private JTextField ageField;
+
 
     private Button dice1;
     private Button dice2;
@@ -198,8 +201,8 @@ public class Screen extends JFrame implements ActionListener {
     }
 
     void createTextFields() {
-        TextField userIDField = new TextField(296, 552, 114, 31, panel);
-        TextField ageField = new TextField(457, 552, 46, 31, panel);
+        userIDField = new TextField(296, 552, 114, 31, panel);
+        ageField = new TextField(457, 552, 46, 31, panel);
     }
 
     void createScores() {
@@ -259,18 +262,18 @@ public class Screen extends JFrame implements ActionListener {
                 specialDice[i] = false;
                 diceButtons.get(i).setContentAreaFilled(true);
                 diceButtons.get(i).setBackground(Color.WHITE);
-                dices[i].setNum(numOfRandDice);
+                dices.get(i).setNum(numOfRandDice);
                 continue;
             }
             /* If it is just normal dice and not fixed, its value will be a random number */
             randomInt = random.nextInt(6) + 1;
-            dices[i].setNum(randomInt);
+            dices.get(i).setNum(randomInt);
         }
     }
 
     public void matchDice() {
         for (int i = 0; i < 5; i++) {
-            int num = dices[i].getNum();
+            int num = dices.get(i).getNum();
             setDiceImage(i + 1, num); // 주사위 번호는 1부터 시작하므로 i + 1을 전달
         }
     }
@@ -357,6 +360,44 @@ public class Screen extends JFrame implements ActionListener {
             }
         }
         totalScoreLabel.setText(Integer.toString(total));
+    }
+
+    private boolean validInput() {
+        String userID = userIDField.getText();
+        String age = ageField.getText();
+        /* if input is invalid, shows the message */
+        try {
+            if (userID.isEmpty() || age.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Enter Input", "Warning", JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+            if (userID.length() != 5) {
+                JOptionPane.showMessageDialog(null, "Username's length should be 5", "Warning",
+                        JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+            for (char c : userID.toCharArray()) {
+                if (!Character.isLetterOrDigit(c)) {
+                    JOptionPane.showMessageDialog(null, "Enter only alphabet or number in the user field", "Warning",
+                            JOptionPane.WARNING_MESSAGE);
+                    return false;
+                }
+            }
+
+            int num = Integer.valueOf(age);
+
+            if (num < 0) {
+                JOptionPane.showMessageDialog(null, "Age can't be below 0", "Warning", JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Enter only number in the age filed", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        return true;
     }
     private void start() {
         SwingWorker<Void, Integer> randDice = new SwingWorker<Void, Integer>() {
