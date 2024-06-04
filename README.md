@@ -2,7 +2,7 @@
 이 프로젝트는 Java Swing을 사용하여 구현한 Yatzy 게임입니다.
 기본적인 게임 룰은 다음을 참고해주세요.
 https://namu.wiki/w/%EC%9A%94%ED%8A%B8(%EA%B2%8C%EC%9E%84)
-https://namu.wiki/w/%EC%95%BC%EC%B0%8C
+https://namu.wiki/w/%EC%95%BC%EC%B0%8C   
 이 프로젝트에서는 기존 yatzy게임과의 차별성을 위해 2개의 아이템을 구현하였습니다.
 
 🎁 item1 : 최대 2개의 주사위를 스페셜 주사위로 변경합니다.
@@ -57,9 +57,9 @@ https://namu.wiki/w/%EC%95%BC%EC%B0%8C
 ## Todo List
 - 게임 재시작 버튼 구현
 - 게임 종료시 이벤트 구현 (현재 게임이 종료되어도 사용자에게 종료되었다는 메세지나 이벤트가 발생하지 않음)
-- 코드가 난잡하여 리팩토링 필요 
-1.component 생성을 ScreenConfiguration 클래스에 위임하기
-2.actionPerformed 메서드가 복잡하므로 각 버튼별로 이벤트 분리하기
+- 코드가 난잡하여 리팩토링 필요
+  1.component 생성을 ScreenConfiguration 클래스에 위임하기
+  2.actionPerformed 메서드가 복잡하므로 각 버튼별로 이벤트 분리하기
 
 ## Reference
 https://en.wikipedia.org/wiki/Yahtzee
