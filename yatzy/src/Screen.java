@@ -1,14 +1,22 @@
+import dice.Dice;
+import score.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Screen extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
     private Panel panel = new Panel();
     private List<Button> diceButtons = new ArrayList<>();
+    private List<Score> scores = new ArrayList<>();
+    private List<Button> scoreBoard = new ArrayList<>();
+    private Dice[] diceArray = new Dice[5];
+    private boolean[] fixDice;
 
     private Button dice1;
     private Button dice2;
@@ -16,18 +24,17 @@ public class Screen extends JFrame implements ActionListener {
     private Button dice4;
     private Button dice5;
 
-    private Button setScore1;
-    private Button setScore2;
-    private Button setScore3;
-    private Button setScore4;
-    private Button setScore5;
-    private Button setScore6;
-    private Button setScore7;
-    private Button setScore8;
-    private Button setScore9;
-    private Button setScore10;
-    private Button setScore11;
-    private Button setScore12;
+    /* Variables for checking condition */
+    private int numOfSpecialDice;
+    private int rollcount;
+    private int count;
+    private int numOfRandDice;
+
+    /* Flags to manage program flow */
+    private boolean issubmitted;
+    private boolean item2used;
+    private boolean clickedItem1;
+    private boolean clickedItem2;
 
     public Screen() throws HeadlessException {
         createDiceButtons();
@@ -60,19 +67,19 @@ public class Screen extends JFrame implements ActionListener {
     }
 
     void createScoreButtons() {
-        Button setScore1 = new Button(253, 145, 120, 44, panel, this);
-        Button setScore2 = new Button(253, 197, 120, 44, panel, this);
-        Button setScore3 = new Button(253, 249, 120, 44, panel, this);
-        Button setScore4 = new Button(253, 301, 120, 44, panel, this);
-        Button setScore5 = new Button(253, 353, 120, 44, panel, this);
-        Button setScore6 = new Button(253, 405, 120, 44, panel, this);
+        Button setScore1 = new Button(253, 145, 120, 44, panel, this, scoreBoard);
+        Button setScore2 = new Button(253, 197, 120, 44, panel, this, scoreBoard);
+        Button setScore3 = new Button(253, 249, 120, 44, panel, this, scoreBoard);
+        Button setScore4 = new Button(253, 301, 120, 44, panel, this, scoreBoard);
+        Button setScore5 = new Button(253, 353, 120, 44, panel, this, scoreBoard);
+        Button setScore6 = new Button(253, 405, 120, 44, panel, this, scoreBoard);
 
-        Button setScore7 = new Button(605, 145, 120, 44, panel, this);
-        Button setScore8 = new Button(605, 197, 120, 44, panel, this);
-        Button setScore9 = new Button(605, 249, 120, 44, panel, this);
-        Button setScore10 = new Button(605, 301, 120, 44, panel, this);
-        Button setScore11 = new Button(605, 353, 120, 44, panel, this);
-        Button setScore12 = new Button(605, 405, 120, 44, panel, this);
+        Button setScore7 = new Button(605, 145, 120, 44, panel, this, scoreBoard);
+        Button setScore8 = new Button(605, 197, 120, 44, panel, this, scoreBoard);
+        Button setScore9 = new Button(605, 249, 120, 44, panel, this, scoreBoard);
+        Button setScore10 = new Button(605, 301, 120, 44, panel, this, scoreBoard);
+        Button setScore11 = new Button(605, 353, 120, 44, panel, this, scoreBoard);
+        Button setScore12 = new Button(605, 405, 120, 44, panel, this, scoreBoard);
     }
 
     void createLabels() {
@@ -172,6 +179,12 @@ public class Screen extends JFrame implements ActionListener {
         TextField ageField = new TextField(457, 552, 46, 31, panel);
     }
 
+    void createScores() {
+        scores.add(new Aces());
+        scores.add(new Deuces());
+        scores.add(new Threes());
+        scores.add(new Fours());
+    }
 
     private void windowConfiguration(Panel panel) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -179,14 +192,15 @@ public class Screen extends JFrame implements ActionListener {
         setContentPane(panel);
         setResizable(false);
     }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 
     private void makeButtonTransparent(JButton button) {
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorderPainted(false);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }
