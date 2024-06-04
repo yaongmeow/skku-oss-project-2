@@ -199,6 +199,71 @@ public class Screen extends JFrame implements ActionListener {
         scores.add(new Yacht());
     }
 
+    void resetDices() {
+        rollcount = 0;
+        for (int i = 0; i < 5; i++) {
+            dices[i] = new Dice();
+            setDiceImage(i + 1, 1);
+            fixDice[i] = false;
+            specialDice[i] = false;
+            numOfSpecialDice = 0;
+            diceButtons.get(i).setContentAreaFilled(true);
+            diceButtons.get(i).setBackground(Color.WHITE);
+        }
+        for (int i = 0; i < 12; i++) {
+            JButton button = scoreBoard.get(i);
+            if (button.isEnabled()) {
+                button.setText("0");
+            }
+        }
+
+    }
+
+    private void setDiceImage(int diceNumber, int num) {
+        JButton diceButton = null;
+
+        // Set the button according to the dice number
+        switch (diceNumber) {
+            case 1:
+                diceButton = dice1;
+                break;
+            case 2:
+                diceButton = dice2;
+                break;
+            case 3:
+                diceButton = dice3;
+                break;
+            case 4:
+                diceButton = dice4;
+                break;
+            case 5:
+                diceButton = dice5;
+                break;
+        }
+
+        // Set image based on numbers
+        switch (num) {
+            case 1:
+                diceButton.setIcon(new ImageIcon(Screen.class.getResource("resource/dice1.png")));
+                break;
+            case 2:
+                diceButton.setIcon(new ImageIcon(Screen.class.getResource("resource/dice2.png")));
+                break;
+            case 3:
+                diceButton.setIcon(new ImageIcon(Screen.class.getResource("resource/dice3.png")));
+                break;
+            case 4:
+                diceButton.setIcon(new ImageIcon(Screen.class.getResource("resource/dice4.png")));
+                break;
+            case 5:
+                diceButton.setIcon(new ImageIcon(Screen.class.getResource("resource/dice5.png")));
+                break;
+            case 6:
+                diceButton.setIcon(new ImageIcon(Screen.class.getResource("resource/dice6.png")));
+                break;
+        }
+    }
+
     private void windowConfiguration(Panel panel) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 785, 749);
