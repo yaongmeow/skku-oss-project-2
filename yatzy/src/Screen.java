@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -54,7 +57,7 @@ public class Screen extends JFrame implements ActionListener {
     private int numOfRandDice;
 
     /* Flags to manage program flow */
-    private boolean issubmitted;
+    private boolean isSubmitted;
     private boolean item2used;
     private boolean clickedItem1;
     private boolean clickedItem2;
@@ -85,11 +88,11 @@ public class Screen extends JFrame implements ActionListener {
     }
 
     void createDiceButtons() {
-        dice1 = screenConfiguration.createDice("resource/dice1.png", 365, 625, 64, 64, panel, diceButtons);;
-        dice2 = screenConfiguration.createDice("resource/dice1.png", 513, 625, 64, 64, panel, diceButtons);;
-        dice3 = screenConfiguration.createDice("resource/dice1.png", 587, 625, 64, 64, panel, diceButtons);;
-        dice4 = screenConfiguration.createDice("resource/dice1.png", 661, 625, 64, 64, panel, diceButtons);;
-        dice5 = screenConfiguration.createDice("resource/dice1.png", 439, 625, 64, 64, panel, diceButtons);;
+        dice1 = screenConfiguration.createDice("resource/dice1.png", 365, 625, 64, 64, panel, diceButtons, this);;
+        dice2 = screenConfiguration.createDice("resource/dice1.png", 513, 625, 64, 64, panel, diceButtons, this);;
+        dice3 = screenConfiguration.createDice("resource/dice1.png", 587, 625, 64, 64, panel, diceButtons, this);;
+        dice4 = screenConfiguration.createDice("resource/dice1.png", 661, 625, 64, 64, panel, diceButtons, this);;
+        dice5 = screenConfiguration.createDice("resource/dice1.png", 439, 625, 64, 64, panel, diceButtons, this);;
     }
 
     void createScoreButtons() {
@@ -109,30 +112,11 @@ public class Screen extends JFrame implements ActionListener {
     }
 
     void createLabels() {
-        Label acesLabel = new Label("resource/aces.png", 44, 147, 199, 42, panel);
-        Label deucesLabel = new Label("resource/deuces.png", 44, 199, 199, 42, panel);
-        Label threesLabel = new Label("resource/Threes.png", 44, 251, 199, 42, panel);
-        Label foursLabel = new Label("resource/Fours.png", 44, 303, 199, 42, panel);
-        Label fivesLabel = new Label("resource/Fives.png", 44, 355, 199, 42, panel);
-        Label sixesLabel = new Label("resource/Sixes.png", 44, 407, 199, 42, panel);
-        Label choiceLabel = new Label("resource/Choice.png", 396, 147, 199, 42, panel);
-        Label fourOfKindLabel = new Label("resource/4ofakind.png", 396, 199, 199, 42, panel);
-        Label fullHouseLabel = new Label("resource/fullhouse.png", 396, 251, 199, 42, panel);
-        Label sStraightLabel = new Label("resource/sstraight.png", 396, 303, 199, 42, panel);
-        Label lStraightLabel = new Label("resource/lstraight.png", 396, 355, 199, 42, panel);
-        Label yachtLabel = new Label("resource/yacht.png", 396, 407, 199, 42, panel);
-        Label subTotalLabel = new Label("resource/subtotal.png", 44, 463, 199, 64, panel);
-        Label totalLabel = new Label("resource/total.png", 396, 463, 199, 64, panel);
-        Label subScoreLabel = new Label("0/63", "Arial", 15, 253, 463, 120, 31, panel);
-        Label totalScoreLabel = new Label("0", "Arial", 16, 605, 463, 120, 64, panel);
-
-        Label title = new Label("resource/title.png", 44, 24, 404, 113, panel);
+        screenConfiguration.createStaticComponents(panel);
+        subScoreLabel = new Label("0/63", "Arial", 15, 253, 463, 120, 31, panel);
+        totalScoreLabel = new Label("0", "Arial", 16, 605, 463, 120, 64, panel);
         randomDice = new Label("resource/dice1.png", 661, 550, 64, 64, panel);
-        Label diceInfo = new Label("resource/diceinfo.png", 513, 550, 138, 59, panel);
-        diceInfo.setHorizontalAlignment(SwingConstants.CENTER);
-        Label bonusLabel = new Label("0", "Arial", 15, 253, 496, 120, 31, panel);
-        Label userNameLabel = new Label("USERNAME", "Arial", 12, 217, 552, 81, 31, panel);
-        Label ageLabel = new Label("AGE", "Arial", 12, 408, 552, 51, 31, panel);
+        bonusLabel = new Label("0", "Arial", 15, 253, 496, 120, 31, panel);
     }
 
     void createActionButtons() {
@@ -245,7 +229,7 @@ public class Screen extends JFrame implements ActionListener {
         clickedItem2 = false;
         item2.setEnabled(false);
         item2used = false;
-        issubmitted = false;
+        isSubmitted = false;
 
     }
 
@@ -456,6 +440,225 @@ public class Screen extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        JButton clickButton = (JButton) e.getSource();
 
+        // 유저가 주사위를 클릭한 경우 발생하는 이벤트
+        for (int i = 0; i < 5; i++) {
+            JButton button = diceButtons.get(i);
+            if (clickButton == button) {
+                if (rollcount == 0 || rollcount > 2) {
+                    if (!clickedItem2)
+                        return;
+                }
+                if (clickedItem1) {
+                    if (fixDice[i])
+                        return;
+                    // 아이템을 사용하여 유저는 스페셜 주사위를 사용할 수 있음
+                    // 이미 고정된 주사위는 스페셜 주사위가 될 수 없음
+                    // 스페셜 주사위는 분홍색 주사위로 표시된다
+                    if (!specialDice[i]) {
+                        if (numOfSpecialDice >= 2)
+                            return;
+                        specialDice[i] = true;
+                        button.setContentAreaFilled(true);
+                        button.setBackground(Color.PINK);
+                        numOfSpecialDice++;
+                        return;
+                    } else {
+                        specialDice[i] = false;
+                        button.setContentAreaFilled(true);
+                        button.setBackground(Color.WHITE);
+                        numOfSpecialDice--;
+                        return;
+                    }
+                }
+
+                // 유저는 주사위를 고정할 수도, 고정하지 않을 수도 있다
+                // 고정된 주사위는 roll 버튼을 눌러도 주사위 눈이 변하지 않는다
+                // 고정된 주사위는 회색 주사위로 표시된다
+                if (!fixDice[i]) {
+                    fixDice[i] = true;
+                    button.setContentAreaFilled(true);
+                    button.setBackground(Color.GRAY);
+                    return;
+                } else {
+                    fixDice[i] = false;
+                    button.setContentAreaFilled(true);
+                    button.setBackground(Color.WHITE);
+                    return;
+                }
+            }
+        }
+
+        // 유저가 roll 버튼을 누르면 주사위를 굴린다
+        // 일반 주사위인 경우 주사위의 눈은 랜덤한 숫자이다
+        if (clickButton == rollButton) {
+            // 각 게임마다 유저는 최대 3번의 주사위를 굴릴 수 있다
+            // 그러나 아이템 2가 사용되면, 유저는 주사위를 한번 더 굴릴 수 있다
+            if (rollcount >= 3 && !clickedItem2) {
+                JOptionPane.showMessageDialog(null, "You can't roll anymore", "",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                // 아이템을 클릭한 채로 roll 버튼을 누르면 아이템이 소모된다
+                if (clickedItem1) {
+                    item1.setEnabled(false);
+                    clickedItem1 = false;
+                }
+                if (clickedItem2) {
+                    item2.setEnabled(false);
+                    item2used = true;
+                    clickedItem2 = false;
+                    rollcount--;
+                }
+                
+                // 주사위를 굴린다
+                rollDices();
+                matchDice();
+                setScore();
+                rollcount++;
+
+                // 만약 유저가 주사위를 3번 굴리고 아이템2가 사용되지 않은 상태이면, 유저는 아이템 2를 사용할 수 있는 상태가 된다
+                if (rollcount == 3 && !item2used) {
+                    item2.setEnabled(true);
+                }
+            }
+        }
+
+        // 유저는 본인의 주사위를 토대로 점수를 획득할 수 있다
+        for (JButton button : scoreBoard) {
+            if (clickButton == button) {
+                // 유저가 점수를 획득하려면 주사위를 최소 한번은 굴려야 한다
+                if (rollcount == 0) {
+                    JOptionPane.showMessageDialog(null, "Roll dices first", "", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                // setScore(clickButton);
+                clickButton.setEnabled(false);
+                setResult();
+                resetDices();
+                count++;
+                item2.setEnabled(false);
+                if (clickedItem1) {
+                    item1.setEnabled(false);
+                    clickedItem1 = false;
+                }
+            }
+        }
+
+        // 유저가 scoreChart 버튼을 누르면 족보를 확인할 수 있다
+        if (clickButton == scoreChart) {
+            ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("scorechart.png"));
+            JOptionPane.showMessageDialog(null, "", "Score Chart", JOptionPane.INFORMATION_MESSAGE, icon);
+        }
+
+        // 유저는 아이템 1 버튼을 눌러 아이템 1을 선택할 수 있다
+        if (clickButton == item1) {
+            // 만약 유저가 아직 주사위를 던지지 않았다면, 아이템 1을 선택할 수 없다
+            // 아이템 1은 주사위를 적어도 한 번 사용해야 선택할 수 있다
+            if (rollcount == 0) {
+                JOptionPane.showMessageDialog(null, "Roll first before using item1", "",
+                        JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+
+            // 아이템 버튼은 토글 버튼처럼 동작함
+            if (!clickedItem1) {
+                // 동시에 같은 아이템은 사용할 수 없음
+                if (clickedItem2) {
+                    JOptionPane.showMessageDialog(null, "You can use only 1 item at a time", "",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                clickedItem1 = true;
+                clickButton.setContentAreaFilled(true);
+                clickButton.setBackground(Color.GRAY);
+                return;
+            } else {
+                clickedItem1 = false;
+                clickButton.setContentAreaFilled(true);
+                clickButton.setBackground(Color.WHITE);
+                for (int i = 0; i < 5; i++) {
+                    if (specialDice[i]) {
+                        diceButtons.get(i).setContentAreaFilled(true);
+                        diceButtons.get(i).setBackground(Color.WHITE);
+                        specialDice[i] = false;
+                    }
+                }
+                numOfSpecialDice = 0;
+                return;
+            }
+        }
+
+        // 아이템 버튼은 토글 버튼처럼 동작함
+        if (clickButton == item2) {
+            if (!clickedItem2) {
+                // 동시에 같은 아이템은 사용할 수 없음
+                if (clickedItem1) {
+                    JOptionPane.showMessageDialog(null, "You can use only 1 item at a time", "",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                clickedItem2 = true;
+                clickButton.setContentAreaFilled(true);
+                clickButton.setBackground(Color.GRAY);
+                return;
+            } else {
+                clickedItem2 = false;
+                clickButton.setContentAreaFilled(true);
+                clickButton.setBackground(Color.WHITE);
+                return;
+            }
+        }
+
+        // 유저가 inforItem1 버튼을 누르면, Item1에 대한 설명이 나옴
+        if (clickButton == infoItem1) {
+            JOptionPane.showMessageDialog(null,
+                    "Set special dice to random dice.\n Click when the desired dice number appears",
+                    "Item 1 information", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        // 유저가 inforItem2 버튼을 누르면, Item2에 대한 설명이 나옴
+        if (clickButton == infoItem2) {
+            JOptionPane.showMessageDialog(null, "You can reroll the dice once more", "Item 2 information",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        // 유저가 submit 버튼을 눌러 게임결과를 저장할 수 있음
+        if (clickButton == submitBtn) {
+            // 게임이 끝나지 않았는데 submit 버튼을 누른 경우, 메세지 창을 팝업
+            if (count != 12) {
+                JOptionPane.showMessageDialog(null, "You must finish the game to submit", "Submit failed",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            // 게임이 종료되었고 textField 의 필드가 유효하다면, 제출 완료 메세지를 출력
+            if (validInput()) {
+                // 만약 제출을 이미 한 상태에서 submit 버튼을 누르면, 이미 제출이 완료되었다는 메세지를 출력
+                if (isSubmitted) {
+                    JOptionPane.showMessageDialog(null, "You already submit the result!", "Submit succeed",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                try {
+                    int totalScore = 0;
+                    for (Score score : scores) {
+                        totalScore += score.calculatedScore(dices);
+                    }
+                    // 게임 결과를 txt 파일에 저장
+                    PrintWriter writer = new PrintWriter(new FileOutputStream("YatzyResult.txt", true));
+                    writer.println("USERNAME : " + userIDField.getText() + " AGE : " + ageField.getText()
+                            + " Total Score : " + Integer.toString(totalScore));
+                    writer.close();
+                    // 유저에게 제출이 완료되었음을 알림
+                    JOptionPane.showMessageDialog(null, "You submit the result!", "Submit succeed",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    isSubmitted = true;
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
     }
 }
