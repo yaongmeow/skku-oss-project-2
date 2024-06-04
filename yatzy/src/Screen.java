@@ -1,5 +1,6 @@
 import dice.Dice;
 import score.*;
+import score.Choice;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,6 +46,7 @@ public class Screen extends JFrame implements ActionListener {
         createScoreButtons();
         createTextFields();
         createActionButtons();
+        createScores();
         windowConfiguration(panel);
     }
 
@@ -187,6 +189,14 @@ public class Screen extends JFrame implements ActionListener {
         scores.add(new Deuces());
         scores.add(new Threes());
         scores.add(new Fours());
+        scores.add(new Fives());
+        scores.add(new Sixes());
+        scores.add(new Choice());
+        scores.add(new FourOfKind());
+        scores.add(new FullHouse());
+        scores.add(new SmallStraight());
+        scores.add(new LargeStraight());
+        scores.add(new Yacht());
     }
 
     private void windowConfiguration(Panel panel) {
