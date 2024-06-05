@@ -149,5 +149,5 @@ void main(String[] args)
   1. component 생성을 ScreenConfiguration 클래스에 위임하기
   2. actionPerformed 메서드의 각 버튼별로 이벤트 분리하기 (현재는 메서드 하나로 처리)
 ## Reference
-https://en.wikipedia.org/wiki/Yahtzee
+https://en.wikipedia.org/wiki/Yahtzee  
 https://docs.oracle.com/javase/7/docs/api/javax/swing/package-summary.html
