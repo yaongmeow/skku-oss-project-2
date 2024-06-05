@@ -58,21 +58,94 @@ random dice는 1번 아이템을 사용할 때를 제외하고는 게임에 영�
 
 ## 코드 설명
 ### class Dice
-### class Aces, Duces, Fours, Fives, Sixes
-### class Choice, FourOfKind, FullHouse, SmallStaright, LargeStaright, Yacht
+- 주사위에 해당하는 객체
+- 주사위 눈에 해당하는 num 멤버 변수를 갖고 있고 객체 생성시 1로 초기화됨
+### interface Score
+Integer calculatedScore(List\<Dice> dices)
+- Dice 리스트를 넘겨받으면 점수를 계산
+### class Aces, Duces, Fours, Fives, Sixes  
+### class Choice, FourOfKind, FullHouse, SmallStaright, LargeStaright, Yacht  
+- Aces부터 Yacht까지 모두 Score 인터페이스를 구현하여 유저의 주사위 정보를 토대로 점수 계산
 ### class Button, Label, Panel, TextField
+각 컴포넌트들에 해당하는 클래스
 ### class ScreenConfiguration
-### class DiceMouseListener
-### class Screen
-### class YatzyGame
+void createStaticComponents(Panel panel)
+- 화면에 필요한 정적 컴포넌트 생성 (주로 라벨)
 
+Button createDice(String iconImagePath, int x, int y, int width, int height, Panel panel, List\<Button> diceButtons, Screen screen)
+- 주사위 버튼 생성
+
+Button createScoreButtons(int x, int y, int width, int height, Panel panel, Screen screen, List\<Button> scoreBoard)
+- 스코어 버튼 생성
+
+### class Hovering
+void mouseEntered(MouseEvent e), void mouseExited(MouseEvent e)
+- 호버링 효과 구현
+### class Screen
+void floatScreen()
+- Screen을 화면에 띄우는 메서드
+
+void createDiceButtons()
+- dice버튼들을 생성하는 메서드
+
+void createScoreButtons()
+- score버튼들을 생성하는 메서드
+
+void createLabels()
+- label들을 생성하는 메서드
+
+void createActionButtons()
+- 이 외에 클릭이 되는 버튼들을 생성하는 메서드
+
+void createTextFields()
+- 텍스트 필드를 생성하는 메서드
+
+void createScores()
+- 계산할 족보를 생성하는 메서드
+
+void resetDices()
+- 주사위를 초기화하는 메서드
+
+void rollDices()
+- 주사위를 굴리는 메서드
+
+void matchDice()
+- 주사위의 숫자에 맞게 주사위의 image를 매핑해주는 메서드
+
+void setDiceImage(int diceNumber, int num)
+- 주사위 눈에 해당하는 이미지로 버튼의 아이콘을 변경해주는 메서드
+
+void setScore()
+- 유저가 선택한 점수를 기입하는 메서드
+
+void setResult()
+- 점수를 계산하는 메서드
+
+boolean validInput()
+- TextField에 입력한 유저의 input이 유효한지 검사
+
+void start()
+- main thread 외에 start thread를 두어 random dice를 업데이트
+
+void windowConfiguration(Panel panel)
+- 화면의 크기를 조절하고, 닫기 버튼을 활성화하는 메서드
+
+void makeButtonTransparent(JButton button)
+- 버튼의 바탕을 투명하게 해주는 메서드
+(버튼의default 바탕 색 제거하기 위함)
+
+void actionPerformed(ActionEvent e)
+- 버튼 클릭(이벤트)를 처리하는 핸들러
+### class YatzyGame
+void main(String[] args) 
+- 게임 실행
 
 ## Todo List
 - 게임 재시작 버튼 구현
 - 게임 종료시 이벤트 구현 (현재 게임이 종료되어도 사용자에게 종료되었다는 메세지나 이벤트가 발생하지 않음)
-- 코드가 난잡하여 리팩토링 필요
+- 리팩토링이 필요한 부분
   1.component 생성을 ScreenConfiguration 클래스에 위임하기
-  2.actionPerformed 메서드가 복잡하므로 각 버튼별로 이벤트 분리하기
+  2.actionPerformed 메서드의 각 버튼별로 이벤트 분리하기 (현재는 메서드 하나로 처리)
 
 ## Reference
 https://en.wikipedia.org/wiki/Yahtzee

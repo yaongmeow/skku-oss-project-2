@@ -234,11 +234,11 @@ public class Screen extends JFrame implements ActionListener {
         Random random = new Random();
         int randomInt;
         for (int i = 0; i < 5; i++) {
-            /* User fixed dice not to be changed */
+            // 고정된 주사위는 변하지 않음
             if (fixDice[i])
                 continue;
 
-            /* If the dice is special dice, change the value not by random */
+            // 스페셜 주사위는 random dice의 숫자를 따라감
             if (specialDice[i]) {
                 specialDice[i] = false;
                 diceButtons.get(i).setContentAreaFilled(true);
@@ -246,7 +246,7 @@ public class Screen extends JFrame implements ActionListener {
                 dices.get(i).setNum(numOfRandDice);
                 continue;
             }
-            /* If it is just normal dice and not fixed, its value will be a random number */
+            // 일반적인 주사위라면 랜덤하게 주사위의 눈이 변경됨
             randomInt = random.nextInt(6) + 1;
             dices.get(i).setNum(randomInt);
         }
