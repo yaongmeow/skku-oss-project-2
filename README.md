@@ -143,10 +143,9 @@ void main(String[] args)
 ## Todo List
 - 게임 재시작 버튼 구현
 - 게임 종료시 이벤트 구현 (현재 게임이 종료되어도 사용자에게 종료되었다는 메세지나 이벤트가 발생하지 않음)
-- 리팩토링이 필요한 부분
-  1.component 생성을 ScreenConfiguration 클래스에 위임하기
-  2.actionPerformed 메서드의 각 버튼별로 이벤트 분리하기 (현재는 메서드 하나로 처리)
-
+- 리팩토링 필요
+  1. component 생성을 ScreenConfiguration 클래스에 위임하기
+  2. actionPerformed 메서드의 각 버튼별로 이벤트 분리하기 (현재는 메서드 하나로 처리)
 ## Reference
 https://en.wikipedia.org/wiki/Yahtzee
 https://docs.oracle.com/javase/7/docs/api/javax/swing/package-summary.html
