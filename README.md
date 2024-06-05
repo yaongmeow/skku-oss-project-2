@@ -55,7 +55,9 @@ random dice는 1번 아이템을 사용할 때를 제외하고는 게임에 영�
 
 ![item2](https://github.com/Suyeong00/yatzy/assets/158289642/fd853d16-6b30-42d2-a35f-6b48610d5d88)  
 원래 주사위는 3번까지 굴리는것이 가능하지만, 2번 아이템을 사용하면 3번째 주사위를 굴렸을 때 한번의 기회를 더 얻을 수 있습니다.  
-
+> 1번 아이템과 2번 아이템을 동시에 사용할 수 없습니다.
+> 게임이 끝난 후 username과 age를 입력하고 submit버튼을 누르면 YatzyResult.txt에 결과가 저장됩니다.
+> 족보는 Score Chart를 클릭하여 확인할 수 있습니다.
 ## 코드 설명
 ### class Dice
 - 주사위에 해당하는 객체
