@@ -15,13 +15,25 @@ https://namu.wiki/w/%EC%95%BC%EC%B0%8C
 |OS| 지원 여부 |
 |-----|--------|
 |windows | :o:  |
-| Linux  | :x: |
-|MacOS  | :x:  |
+| Linux  | ❓(확인 필요) |
+|MacOS  | ❓(확인 필요)  |
+
+윈도우 
 
 ### 실행 방법
 #### Windows
-1. Java 17 version을 설치한다
-2. YatzyGame의 Main 메소드 실행
+1. Java 설치 (17 version 권장)
+https://www.oracle.com/java/technologies/downloads/#java17  
+2. 레포지토리 복사  
+```sh
+git clone https://github.com/Suyeong00/yatzy.git
+```
+3. 컴파일 후 게임 실행  
+```sh
+cd .\yatzy\yatzy\src\
+javac -encoding UTF-8 dice\*.java score\*.java *.java
+java -cp . YatzyGame
+```
 
 ## 게임 예시
 1. 주사위 굴리고 점수 등록하기
@@ -37,6 +49,7 @@ https://namu.wiki/w/%EC%95%BC%EC%B0%8C
 ![item1](https://github.com/Suyeong00/yatzy/assets/158289642/47339de2-24f3-45c8-a0d4-5f576a999234)  
 1번 아이템을 사용하면 최대 2개까지의 주사위를 스페셜 주사위로 설정할 수 있습니다.  
 스페셜 주사위는 변하는 random dice에 맞춰 roll 버튼을 클릭하면 클릭 당시의 random dice의 주사위 눈으로 변합니다.  
+random dice는 1번 아이템을 사용할 때를 제외하고는 게임에 영향을 주지 않습니다.
 
 3. 2번 아이템 사용
 

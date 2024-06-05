@@ -36,7 +36,7 @@ public class ScreenConfiguration {
         panel.add(dice);
         diceButtons.add(dice);
 
-        dice.addMouseListener(new DiceMouseListener());
+        dice.addMouseListener(new Hovering());
         dice.addActionListener(screen);
         return dice;
     }

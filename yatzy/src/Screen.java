@@ -88,11 +88,11 @@ public class Screen extends JFrame implements ActionListener {
     }
 
     void createDiceButtons() {
-        dice1 = screenConfiguration.createDice("resource/dice1.png", 365, 625, 64, 64, panel, diceButtons, this);;
-        dice2 = screenConfiguration.createDice("resource/dice1.png", 513, 625, 64, 64, panel, diceButtons, this);;
-        dice3 = screenConfiguration.createDice("resource/dice1.png", 587, 625, 64, 64, panel, diceButtons, this);;
-        dice4 = screenConfiguration.createDice("resource/dice1.png", 661, 625, 64, 64, panel, diceButtons, this);;
-        dice5 = screenConfiguration.createDice("resource/dice1.png", 439, 625, 64, 64, panel, diceButtons, this);;
+        dice1 = screenConfiguration.createDice("resource/dice1.png", 365, 625, 64, 64, panel, diceButtons, this);
+        dice2 = screenConfiguration.createDice("resource/dice1.png", 513, 625, 64, 64, panel, diceButtons, this);
+        dice3 = screenConfiguration.createDice("resource/dice1.png", 587, 625, 64, 64, panel, diceButtons, this);
+        dice4 = screenConfiguration.createDice("resource/dice1.png", 661, 625, 64, 64, panel, diceButtons, this);
+        dice5 = screenConfiguration.createDice("resource/dice1.png", 439, 625, 64, 64, panel, diceButtons, this);
     }
 
     void createScoreButtons() {
@@ -156,11 +156,11 @@ public class Screen extends JFrame implements ActionListener {
         panel.add(infoItem2);
 
         makeButtonTransparent(rollButton);
-        rollButton.addMouseListener(new DiceMouseListener());
+        rollButton.addMouseListener(new Hovering());
         rollButton.addActionListener(this);
 
         makeButtonTransparent(scoreChart);
-        scoreChart.addMouseListener(new DiceMouseListener());
+        scoreChart.addMouseListener(new Hovering());
         scoreChart.addActionListener(this);
 
         makeButtonTransparent(submitBtn);
@@ -168,19 +168,19 @@ public class Screen extends JFrame implements ActionListener {
         submitBtn.addActionListener(this);
 
         item1.addActionListener(this);
-        item1.addMouseListener(new DiceMouseListener());
+        item1.addMouseListener(new Hovering());
         makeButtonTransparent(item1);
 
         item2.addActionListener(this);
-        item2.addMouseListener(new DiceMouseListener());
+        item2.addMouseListener(new Hovering());
         makeButtonTransparent(item2);
 
         infoItem1.addActionListener(this);
-        infoItem1.addMouseListener(new DiceMouseListener());
+        infoItem1.addMouseListener(new Hovering());
         makeButtonTransparent(infoItem1);
 
         infoItem2.addActionListener(this);
-        infoItem2.addMouseListener(new DiceMouseListener());
+        infoItem2.addMouseListener(new Hovering());
         makeButtonTransparent(infoItem2);
     }
 
