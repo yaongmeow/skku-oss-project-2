@@ -8,8 +8,6 @@ public class Label extends JLabel {
         panel.add(this);
     }
 
-
-
     public Label(String text, String font, int fontSize, int x, int y, int width,int height, Panel panel) {
         super(text);
         this.setFont(new Font(font, Font.BOLD, fontSize));

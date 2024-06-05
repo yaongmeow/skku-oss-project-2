@@ -9,21 +9,23 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class Screen extends JFrame implements ActionListener {
-    private static ScreenConfiguration screenConfiguration = new ScreenConfiguration();
+    private static final ScreenConfiguration screenConfiguration = new ScreenConfiguration();
+    @Serial
     private static final long serialVersionUID = 1L;
-    private Panel panel = new Panel();
-    private List<Button> diceButtons = new ArrayList<>();
-    private List<Score> scores = new ArrayList<>();
-    private List<Button> scoreBoard = new ArrayList<>();
+    private final Panel panel = new Panel();
+    private final List<Button> diceButtons = new ArrayList<>();
+    private final List<Score> scores = new ArrayList<>();
+    private final List<Button> scoreBoard = new ArrayList<>();
 
-    private List<Dice> dices = new ArrayList<>();
-    private boolean[] fixDice = new boolean[5];
-    private boolean[] specialDice = new boolean[5];
+    private final List<Dice> dices = new ArrayList<>();
+    private final boolean[] fixDice = new boolean[5];
+    private final boolean[] specialDice = new boolean[5];
 
 
     private JButton item1;
@@ -50,13 +52,11 @@ public class Screen extends JFrame implements ActionListener {
     private Button dice4;
     private Button dice5;
 
-    /* Variables for checking condition */
     private int numOfSpecialDice;
-    private int rollcount;
+    private int rollCount;
     private int count;
     private int numOfRandDice;
 
-    /* Flags to manage program flow */
     private boolean isSubmitted;
     private boolean item2used;
     private boolean clickedItem1;
@@ -205,7 +205,7 @@ public class Screen extends JFrame implements ActionListener {
     }
 
     void resetDices() {
-        rollcount = 0;
+        rollCount = 0;
         dices.clear();
         for (int i = 0; i < 5; i++) {
             dices.add(new Dice());
@@ -223,12 +223,10 @@ public class Screen extends JFrame implements ActionListener {
             }
         }
 
-        //count = 0;
         numOfRandDice = 0;
         clickedItem1 = false;
         clickedItem2 = false;
         item2.setEnabled(false);
-        //item2used = false;
         isSubmitted = false;
     }
 
@@ -264,7 +262,7 @@ public class Screen extends JFrame implements ActionListener {
     private void setDiceImage(int diceNumber, int num) {
         JButton diceButton = null;
 
-        // Set the button according to the dice number
+        // 버튼을 dice 의 숫자로 변경
         switch (diceNumber) {
             case 1:
                 diceButton = dice1;
@@ -283,7 +281,7 @@ public class Screen extends JFrame implements ActionListener {
                 break;
         }
 
-        // Set image based on numbers
+        // 숫자에 기반한 이미지로 변경
         switch (num) {
             case 1:
                 diceButton.setIcon(new ImageIcon(Screen.class.getResource("resource/dice1.png")));
@@ -320,7 +318,7 @@ public class Screen extends JFrame implements ActionListener {
     private void setResult() {
         int total = 0;
         int subtotal = 0;
-        // Calculate sub score
+        // 부분 점수 계산
         for (int i = 0; i < 6; i++) {
             JButton button = scoreBoard.get(i);
             if (!button.isEnabled()) {
@@ -328,13 +326,13 @@ public class Screen extends JFrame implements ActionListener {
             }
         }
         subScoreLabel.setText(Integer.toString(subtotal) + "/63");
-        // If subscore exceeds 63, get a bonus score
+        // 부분 점수가 63을 넘으면 추가 점수 획득
         if (subtotal >= 63) {
             bonusLabel.setText("35");
             total += 35;
         }
 
-        // Calculate total score
+        // 최종 점수 계산
         total += subtotal;
         for (int i = 6; i < 12; i++) {
             JButton button = scoreBoard.get(i);
@@ -348,7 +346,7 @@ public class Screen extends JFrame implements ActionListener {
     private boolean validInput() {
         String userID = userIDField.getText();
         String age = ageField.getText();
-        /* if input is invalid, shows the message */
+        // 입력이 유효하지 않으면 메세지를 띄움
         try {
             if (userID.isEmpty() || age.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Enter Input", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -384,8 +382,7 @@ public class Screen extends JFrame implements ActionListener {
     }
     private void start() {
         SwingWorker<Void, Integer> randDice = new SwingWorker<Void, Integer>() {
-
-            /* In background, just update the random dice number */
+            // 스레딩을 통해 게임중에 random dice 를 업데이트
             @Override
             protected Void doInBackground() throws Exception {
                 while (true) {
@@ -445,7 +442,7 @@ public class Screen extends JFrame implements ActionListener {
         for (int i = 0; i < 5; i++) {
             JButton button = diceButtons.get(i);
             if (clickButton == button) {
-                if (rollcount == 0 || rollcount > 2) {
+                if (rollCount == 0 || rollCount > 2) {
                     if (!clickedItem2)
                         return;
                 }
@@ -497,7 +494,7 @@ public class Screen extends JFrame implements ActionListener {
 
             // 각 게임마다 유저는 최대 3번의 주사위를 굴릴 수 있다
             // 그러나 아이템 2가 사용되면, 유저는 주사위를 한번 더 굴릴 수 있다
-            if (rollcount >= 3 && !clickedItem2) {
+            if (rollCount >= 3 && !clickedItem2) {
                 JOptionPane.showMessageDialog(null, "You can't roll anymore", "",
                         JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -510,17 +507,17 @@ public class Screen extends JFrame implements ActionListener {
                     item2.setEnabled(false);
                     item2used = true;
                     clickedItem2 = false;
-                    rollcount--;
+                    rollCount--;
                 }
                 
                 // 주사위를 굴린다
                 rollDices();
                 matchDice();
                 setScore();
-                rollcount++;
+                rollCount++;
 
                 // 만약 유저가 주사위를 3번 굴리고 아이템2가 사용되지 않은 상태이면, 유저는 아이템 2를 사용할 수 있는 상태가 된다
-                if (rollcount == 3 && !item2used) {
+                if (rollCount == 3 && !item2used) {
                     item2.setEnabled(true);
                 }
             }
@@ -530,7 +527,7 @@ public class Screen extends JFrame implements ActionListener {
         for (JButton button : scoreBoard) {
             if (clickButton == button) {
                 // 유저가 점수를 획득하려면 주사위를 최소 한번은 굴려야 한다
-                if (rollcount == 0) {
+                if (rollCount == 0) {
                     JOptionPane.showMessageDialog(null, "Roll dices first", "", JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
@@ -557,7 +554,7 @@ public class Screen extends JFrame implements ActionListener {
         if (clickButton == item1) {
             // 만약 유저가 아직 주사위를 던지지 않았다면, 아이템 1을 선택할 수 없다
             // 아이템 1은 주사위를 적어도 한 번 사용해야 선택할 수 있다
-            if (rollcount == 0) {
+            if (rollCount == 0) {
                 JOptionPane.showMessageDialog(null, "Roll first before using item1", "",
                         JOptionPane.INFORMATION_MESSAGE);
                 return;
