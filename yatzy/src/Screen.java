@@ -564,6 +564,9 @@ public class Screen extends JFrame implements ActionListener {
                     item1.setEnabled(false);
                     clickedItem1 = false;
                 }
+                if(count == 12){
+                    JOptionPane.showMessageDialog(null, "Game End!", "", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         }
 
