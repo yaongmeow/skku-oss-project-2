@@ -564,9 +564,27 @@ public class Screen extends JFrame implements ActionListener {
                     item1.setEnabled(false);
                     clickedItem1 = false;
                 }
+                /** phase 2 **/
                 if(count == 12){
-                    JOptionPane.showMessageDialog(null, "Game End!", "", JOptionPane.INFORMATION_MESSAGE);
+                    String[] options = {"Restart", "Submit", "Exit"};
+                    int selectedOption = JOptionPane.showOptionDialog(
+                            null,
+                            "Game End!",
+                            "",
+                            JOptionPane.DEFAULT_OPTION,
+                            JOptionPane.INFORMATION_MESSAGE,
+                            null,
+                            options,
+                            options[0]
+                    );
+
+                    if(selectedOption == 0){
+                        restartGame();
+                    } else if(selectedOption == 2){
+                        System.exit(0);
+                    }
                 }
+                /** phase 2 **/
             }
         }
 
