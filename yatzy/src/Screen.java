@@ -355,7 +355,9 @@ public class Screen extends JFrame implements ActionListener {
         for (int i = 6; i < 12; i++) {
             JButton button = scoreBoard.get(i);
             if (!button.isEnabled()) {
-                total += scores.get(i).calculatedScore(dices);
+                /** phase 2 **/
+                total += Integer.parseInt(button.getText());
+                /** phase 2 **/
             }
         }
         totalScoreLabel.setText(Integer.toString(total));
