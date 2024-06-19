@@ -27,6 +27,9 @@ public class Screen extends JFrame implements ActionListener {
     private final boolean[] fixDice = new boolean[5];
     private final boolean[] specialDice = new boolean[5];
 
+    /** phase 2 **/
+    private JButton restartBtn;
+    /** phase 2 **/
 
     private JButton item1;
     private JButton item2;
@@ -155,6 +158,13 @@ public class Screen extends JFrame implements ActionListener {
         infoItem2.setBounds(159, 573, 44, 44);
         panel.add(infoItem2);
 
+        /** phase 2 **/
+        restartBtn = new JButton("Restart");
+        restartBtn.setFont(new Font("Arial", Font.BOLD, 18));
+        restartBtn.setBounds(605, 10, 120, 44);
+        panel.add(restartBtn);
+        /** phase 2 **/
+
         makeButtonTransparent(rollButton);
         rollButton.addMouseListener(new Hovering());
         rollButton.addActionListener(this);
@@ -182,6 +192,12 @@ public class Screen extends JFrame implements ActionListener {
         infoItem2.addActionListener(this);
         infoItem2.addMouseListener(new Hovering());
         makeButtonTransparent(infoItem2);
+
+        /** phase 2 **/
+        restartBtn.addActionListener(this);
+        restartBtn.addMouseListener(new Hovering());
+        makeButtonTransparent(restartBtn);
+        /** phase 2 **/
     }
 
     void createTextFields() {
@@ -438,6 +454,13 @@ public class Screen extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton clickButton = (JButton) e.getSource();
 
+        /** phase 2 **/
+        if (clickButton == restartBtn) {
+            restartGame();
+            return;
+        }
+        /** phase 2 **/
+
         // 유저가 주사위를 클릭한 경우 발생하는 이벤트
         for (int i = 0; i < 5; i++) {
             JButton button = diceButtons.get(i);
@@ -660,4 +683,30 @@ public class Screen extends JFrame implements ActionListener {
             }
         }
     }
+
+    /** phase 2 **/
+    private void restartGame(){
+        int choice = JOptionPane.showConfirmDialog(null, "게임을 재시작하시겠습니까?", "게임 재시작", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.NO_OPTION) {
+           return;
+        }
+        resetDices();
+        for (int i = 0; i < 12; i++) {
+            JButton button = scoreBoard.get(i);
+            button.setEnabled(true);
+            button.setText("0");
+        }
+        subScoreLabel.setText("0/63");
+        totalScoreLabel.setText("0");
+        bonusLabel.setText("0");
+        count = 0;
+        item1.setEnabled(true);
+        item1.setBackground(Color.WHITE);
+        item2.setEnabled(false);
+        item2.setBackground(Color.WHITE);
+        item2used = false;
+        scores.clear();
+        createScores();
+    }
+    /** phase 2 **/
 }
