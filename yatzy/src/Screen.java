@@ -536,7 +536,6 @@ public class Screen extends JFrame implements ActionListener {
                     clickedItem2 = false;
                     rollCount--;
                 }
-                
                 // 주사위를 굴린다
                 rollDices();
                 matchDice();
@@ -730,8 +729,6 @@ public class Screen extends JFrame implements ActionListener {
         item2.setEnabled(false);
         item2.setBackground(Color.WHITE);
         item2used = false;
-        scores.clear();
-        createScores();
     }
     /** phase 2 **/
 }

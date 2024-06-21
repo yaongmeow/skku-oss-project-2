@@ -151,3 +151,10 @@ void main(String[] args)
 ## Reference
 https://en.wikipedia.org/wiki/Yahtzee  
 https://docs.oracle.com/javase/7/docs/api/javax/swing/package-summary.html
+
+---
+
+## Phase 2 구현사항
+- 게임 재시작 버튼 구현
+- 게임 종료 이벤트 구현
+- 점수 계산 오류 수정
